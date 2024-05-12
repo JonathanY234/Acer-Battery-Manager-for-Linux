@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/laptop.png</file>
+    </qresource>
+</RCC>
