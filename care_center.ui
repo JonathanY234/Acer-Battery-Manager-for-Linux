@@ -259,6 +259,16 @@
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
+    <zorder>label</zorder>
+    <zorder>label_2</zorder>
+    <zorder>label_3</zorder>
+    <zorder>label_4</zorder>
+    <zorder>label_5</zorder>
+    <zorder>label_6</zorder>
+    <zorder>label_7</zorder>
+    <zorder>label_9</zorder>
+    <zorder>label_10</zorder>
+    <zorder>label_8</zorder>
    </widget>
    <widget class="QFrame" name="frame_2">
     <property name="geometry">
@@ -300,10 +310,10 @@
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="healthModeToggle">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>50</x>
        <y>280</y>
        <width>271</width>
        <height>22</height>
@@ -315,7 +325,10 @@
       </font>
      </property>
      <property name="text">
-      <string>Battery Health Mode (enabled)</string>
+      <string>Battery Health Mode (enabled) poopoo</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLabel" name="label_16">
@@ -366,7 +379,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QCommandLinkButton" name="commandLinkButton_3">
+    <widget class="QPushButton" name="bCalibrateButton">
      <property name="geometry">
       <rect>
        <x>50</x>
@@ -423,7 +436,7 @@
     <property name="frameShadow">
      <enum>QFrame::Shadow::Raised</enum>
     </property>
-    <widget class="QCommandLinkButton" name="commandLinkButton_2">
+    <widget class="QPushButton" name="UpdateButton">
      <property name="geometry">
       <rect>
        <x>80</x>
@@ -526,9 +539,9 @@
     <widget class="QLabel" name="label_14">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>10</x>
        <y>147</y>
-       <width>131</width>
+       <width>271</width>
        <height>21</height>
       </rect>
      </property>
@@ -540,13 +553,16 @@
      <property name="text">
       <string>Junk files:</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="label_15">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>10</x>
        <y>170</y>
-       <width>131</width>
+       <width>271</width>
        <height>21</height>
       </rect>
      </property>
@@ -558,8 +574,11 @@
      <property name="text">
       <string>529 MB</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
     </widget>
-    <widget class="QCommandLinkButton" name="commandLinkButton">
+    <widget class="QPushButton" name="clearButton">
      <property name="geometry">
       <rect>
        <x>60</x>
@@ -575,6 +594,9 @@
      </property>
      <property name="text">
       <string>Clear</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>

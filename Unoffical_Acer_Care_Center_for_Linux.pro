@@ -9,10 +9,12 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    backend.cpp \
     main.cpp \
     care_center.cpp
 
 HEADERS += \
+    backend.h \
     care_center.h
 
 FORMS += \
