@@ -17,7 +17,7 @@ Care_Center::Care_Center(QWidget *parent)
     //set the Battery Health Mode toggle text
     if (getBatteryState() == 0){
         ui->healthModeToggle->setText("Battery Health Mode (Disabled)");
-        ui->healthModeToggle->setChecked(false);
+        //ui->healthModeToggle->setChecked(false);
     }
     else {
         ui->healthModeToggle->setText("Battery Health Mode (Enabled)");
@@ -52,8 +52,13 @@ void Care_Center::on_bCalibrateButton_clicked()
 void Care_Center::on_healthModeToggle_stateChanged(int state)
 {
     state = state / 2;
+    cout << "state: " << state << " getBatteryState: " << getBatteryState() << std::flush;
+    if ((state) == getBatteryState()) {//skip if we are not changing anything
+        return;
+    }
+    cout << "\n we are setting battery state to " << (state) << std::flush;
 
-    setBatteryState(state ^ 1);//bitwise xor with 1 toggles the value
+    setBatteryState(state);//bitwise XOR with 1 to toggle state
     if (getBatteryState() == 0){
         ui->healthModeToggle->setText("Battery Health Mode (Disabled)");
     }
