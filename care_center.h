@@ -17,6 +17,15 @@ public:
     Care_Center(QWidget *parent = nullptr);
     ~Care_Center();
 
+private slots:
+    void on_clearButton_clicked();
+
+    void on_UpdateButton_clicked();
+
+    void on_bCalibrateButton_clicked();
+
+    void on_healthModeToggle_stateChanged(int state);
+
 private:
     Ui::Care_Center *ui;
 };
