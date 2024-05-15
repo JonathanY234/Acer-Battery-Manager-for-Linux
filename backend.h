@@ -1,3 +1,4 @@
+// Language: C++
 #ifndef BACKEND_H
 #define BACKEND_H
 
@@ -9,5 +10,6 @@ QString getOsName();
 QString getGpuName();
 QString getCpuName();
 QString getTotalRam();
+void sendStatusGui(QString message);
 
 #endif // BACKEND_H

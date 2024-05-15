@@ -13,7 +13,11 @@ Care_Center::Care_Center(QWidget *parent)
     ui->setupUi(this);
 
     //complile and load the kernel module
-    //compileAndLoadKernelModule();//temp because broken kmod
+    try {
+        compileAndLoadKernelModule();
+    } catch (const std::runtime_error& e) {
+        sendStatusGui("failed to load kernel module: battery features wont work");
+    }
 
     //set the Battery Health Mode toggle text
     if (getBatteryState() == 0){
@@ -21,15 +25,18 @@ Care_Center::Care_Center(QWidget *parent)
     }
     else {
         ui->healthModeToggle->setText("Battery Health Mode (Enabled)");
-        //ui->healthModeToggle->setChecked(true);//temp because broken kmod
+        try {
+            ui->healthModeToggle->setChecked(true);
+        } catch(...) {
+            qDebug() << "attempted to check battery health mode and failed";
+        }
+
     }
     ui->modelName->setText(getHostNameQString());
     ui->osName->setText(getOsName());
     ui->nOBits->setText(QString::number(sizeof(void*) * 8) + "-bit");
     ui->cpuName->setText(getCpuName());
     ui->ramAmount->setText(getTotalRam() + " GiB");
-    //test
-    qDebug() << getTotalRam();
 }
 
 Care_Center::~Care_Center()
@@ -41,14 +48,6 @@ void Care_Center::on_clearButton_clicked()
 {
     cout << "clear button" << std::flush;
 }
-
-
-void Care_Center::on_UpdateButton_clicked()
-{
-    cout << "update button" << std::flush;
-
-}
-
 
 void Care_Center::on_bCalibrateButton_clicked()
 {
@@ -67,13 +66,19 @@ void Care_Center::on_healthModeToggle_stateChanged(int state)
 
     cout << "\n we are setting battery state to " << (state) << std::flush;
 
-    setBatteryState(state);//bitwise XOR with 1 to toggle state
+    try {
+        setBatteryState(state);//bitwise XOR with 1 to toggle state
+    } catch(const std::runtime_error& e) {
+        sendStatusGui("attempted to toggle battery health mode and failed");
+        qDebug() << "attempted to toggle battery health mode and failed";
+    }
     if (getBatteryState() == 0){
         ui->healthModeToggle->setText("Battery Health Mode (Disabled)");
     }
     else {
         ui->healthModeToggle->setText("Battery Health Mode (Enabled)");
     }
-    //still issues with the checkbox state not being correct
 }
-
+void Care_Center::sendStatusGui(QString message) {
+    ui->textOutput->appendPlainText(message);
+}

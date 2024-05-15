@@ -15,12 +15,11 @@ class Care_Center : public QMainWindow
 
 public:
     Care_Center(QWidget *parent = nullptr);
+    void sendStatusGui(QString message);
     ~Care_Center();
 
 private slots:
     void on_clearButton_clicked();
-
-    void on_UpdateButton_clicked();
 
     void on_bCalibrateButton_clicked();
 

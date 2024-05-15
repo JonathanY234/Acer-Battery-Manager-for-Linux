@@ -13,8 +13,7 @@
 //0 means no limit
 
 bool runKernelModLoadCommand(QString kernelModPath) {
-    //QString command = "pkexec insmod " + kernelModPath;
-    QString command = "pkexec modprobe --force " + kernelModPath;
+    QString command = "pkexec insmod " + kernelModPath;
 
     QProcess process;
     process.start(command);
@@ -62,20 +61,19 @@ void compileAndLoadKernelModule() {
         return;
     }
     //failed again for some reason
-    //add error messages
-    std::cout << "fail" << std::flush;
+
+    throw std::runtime_error("Failed to load the kernel module");
 }
 
 int getBatteryState() {
+
     std::ifstream file("/sys/bus/wmi/drivers/acer-wmi-battery/health_mode");
     int state;
     file >> state; // Read the integer value from the file
     file.close();
-    //std::cout << "\ngetBatteryState triggered: health state: " << state << std::endl;
     return state;
 }
 void setBatteryState(int state) {
-
     const char* command;
     if (state == 0) {
         command = "pkexec sh -c 'echo 0 | tee /sys/bus/wmi/drivers/acer-wmi-battery/health_mode'";
@@ -83,7 +81,11 @@ void setBatteryState(int state) {
     else if (state == 1) {
         command = "pkexec sh -c 'echo 1 | tee /sys/bus/wmi/drivers/acer-wmi-battery/health_mode'";
     }
-    system(command);
+    int returnValue = system(command);
+    if (returnValue != 0) {
+        // The command failed
+        throw std::runtime_error("Health Mode toggle Command failed");
+    }
 }
 QString getHostNameQString() {
     QString hostname;
@@ -150,7 +152,6 @@ QString getTotalRam() {
     QByteArray result = process.readAllStandardOutput();
     QString ramInKB = QString(result).trimmed(); // Trim whitespace from both ends
     ramInKB = ramInKB.section(' ', 0, 0);
-    //return ramInKB;
     double ramInGB = ramInKB.toDouble() / (1024 * 1024);
     return QString::number(ramInGB).left(5);
 }
