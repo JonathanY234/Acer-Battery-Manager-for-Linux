@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/update.png</file>
+        <file>images/recycling_bin.png</file>
     </qresource>
 </RCC>
