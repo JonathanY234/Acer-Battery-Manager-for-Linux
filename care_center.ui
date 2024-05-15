@@ -91,7 +91,7 @@
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="modelName">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -106,17 +106,17 @@
       </font>
      </property>
      <property name="text">
-      <string>Aspire Abla bla bla</string>
+      <string>Model name placeholder</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="label_1">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>190</y>
+       <y>330</y>
        <width>301</width>
        <height>21</height>
       </rect>
@@ -127,17 +127,17 @@
       </font>
      </property>
      <property name="text">
-      <string>SNID:</string>
+      <string>RAM:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_5">
+    <widget class="QLabel" name="ramAmount">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>210</y>
+       <y>350</y>
        <width>301</width>
        <height>21</height>
       </rect>
@@ -148,34 +148,13 @@
       </font>
      </property>
      <property name="text">
-      <string>4564864646</string>
+      <string>ram placeholder</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="label_6">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>250</y>
-       <width>301</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>SN:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -186,11 +165,32 @@
      </property>
      <property name="font">
       <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>CPU:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="cpuName">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>290</y>
+       <width>301</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
        <pointsize>9</pointsize>
       </font>
      </property>
      <property name="text">
-      <string>9HRWGF9GF9G49WGFBRU38</string>
+      <string>cpu placeholder</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -199,9 +199,9 @@
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>320</y>
-       <width>311</width>
+       <x>10</x>
+       <y>180</y>
+       <width>301</width>
        <height>21</height>
       </rect>
      </property>
@@ -217,11 +217,11 @@
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_9">
+    <widget class="QLabel" name="osName">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>340</y>
+       <y>200</y>
        <width>301</width>
        <height>21</height>
       </rect>
@@ -232,17 +232,17 @@
       </font>
      </property>
      <property name="text">
-      <string>Fedora Linux</string>
+      <string>something Linux placeholder</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_10">
+    <widget class="QLabel" name="nOBits">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>360</y>
+       <y>220</y>
        <width>301</width>
        <height>21</height>
       </rect>
@@ -253,7 +253,7 @@
       </font>
      </property>
      <property name="text">
-      <string>64-bit</string>
+      <string>x-bit placeholder</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -261,13 +261,13 @@
     </widget>
     <zorder>label</zorder>
     <zorder>label_2</zorder>
-    <zorder>label_3</zorder>
-    <zorder>label_4</zorder>
-    <zorder>label_5</zorder>
+    <zorder>modelName</zorder>
+    <zorder>label_1</zorder>
+    <zorder>ramAmount</zorder>
     <zorder>label_6</zorder>
-    <zorder>label_7</zorder>
-    <zorder>label_9</zorder>
-    <zorder>label_10</zorder>
+    <zorder>cpuName</zorder>
+    <zorder>osName</zorder>
+    <zorder>nOBits</zorder>
     <zorder>label_8</zorder>
    </widget>
    <widget class="QFrame" name="frame_2">
@@ -325,7 +325,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Battery Health Mode (enabled) poopoo</string>
+      <string>Battery Health Mode (enabled) placeholder</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -603,8 +603,8 @@
   </widget>
  </widget>
  <resources>
-  <include location="laptop_icon.qrc"/>
   <include location="update_icon.qrc"/>
+  <include location="laptop_icon.qrc"/>
   <include location="Battery_icon.qrc"/>
  </resources>
  <connections/>
