@@ -1,0 +1,3 @@
+build essencial
+linux headers
+qt5
