@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/laptop.png</file>
+        <file>images/battery.png</file>
+    </qresource>
+</RCC>

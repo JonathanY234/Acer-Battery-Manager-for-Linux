@@ -1,17 +1,17 @@
-#include "care_center.h"
+#include "carecenter.h"
 
 #include <QApplication>
+#include <QLoggingCategory>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Care_Center w;
 
-    Q_INIT_RESOURCE(laptop_icon);
-    QIcon icon(":/images/AcerCareCenter.ico");
-    // Set the application icon
-    a.setWindowIcon(icon);
+    // Override Qt's logging rules to enable debug messages, disable for release
+    QLoggingCategory::setFilterRules("*.debug=true\n*.warning=true\n*.critical=true\nqt.*.debug=false");
+    //QLoggingCategory::setFilterRules("*.debug=true\nqt.*.debug=false");
 
+    CareCenter w;
     w.show();
     return a.exec();
 }

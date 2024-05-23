@@ -1,68 +1,59 @@
-#include <cstdlib>
-#include <iostream>
+//#include <cstdlib>
+//#include <iostream>
 #include <fstream>
-#include <unistd.h>
+//#include <unistd.h>
 
 #include <QProcess>
 #include <QString>
 #include <QDebug>
 #include <QCoreApplication>
-#include <QFileInfo>
+#include <QFileInfo>//
 
 //1 means battery 80% limit on
 //0 means no limit
 
-bool runKernelModLoadCommand(QString kernelModPath) {
+void runKernelModLoadCommand(QString kernelModPath) {
     QString command = "pkexec insmod " + kernelModPath;
 
-    QProcess process;
-    process.start(command);
-    // Wait for the process to finish
-    process.waitForFinished();
-    // Check the exit status of the process
-    if (process.exitCode() == 0) {
-        qDebug() << "Command executed successfully";
-        return true;
-    } else {
-        QByteArray stderr = process.readAllStandardError();
-        qDebug() << "Error executing command:" << stderr;
-        return false;
-    }
+    system(command.toUtf8().constData());
 }
-void compileAndLoadKernelModule() {
+bool doesFileExist(QString healthModeFilePath) {
+    QFileInfo fileInfoHealthMode(healthModeFilePath);
+    if(fileInfoHealthMode.exists()) {
+        return true;
+    }
+    return false;
+}
+int compileAndLoadKernelModule() {
     //for some reason pkexec only works with absolute path
     QString applicationPath = QCoreApplication::applicationDirPath();
     QString kernelModPath = applicationPath + "/acer-wmi-battery/acer-wmi-battery.ko";
-
     QString healthModeFilePath = "/sys/bus/wmi/drivers/acer-wmi-battery/health_mode";
-    QFileInfo fileInfoHealthMode(healthModeFilePath);//used to check if the code has been compilied
 
+    //check if the kernel mod is already loaded
+    if(doesFileExist(healthModeFilePath)) {
+        return 1;
+    }
     //if kernel mod not compiled at all just skip straight to compiling
     QFileInfo fileInfoKernelModFile(kernelModPath);
     if (!fileInfoKernelModFile.exists()) {
         goto skip_to_compile;
     }
-
-    //check if the kernel mod is already loaded
-    if(fileInfoHealthMode.exists()) {
-        return;
-    }
     //else kernel mod not loaded, attempt to load it
-    bool success;
-    success = runKernelModLoadCommand(kernelModPath);
-    if (success) {
-        return;
+
+    runKernelModLoadCommand(kernelModPath);
+    if(doesFileExist(healthModeFilePath)) {
+        return 0;
     }
     //else load failed, try compiling it
     skip_to_compile:
-    system("make -C acer-wmi-battery");
-    success = runKernelModLoadCommand(kernelModPath);
-    if (success) {
-        return;
+    //system("make -C acer-wmi-battery");
+    runKernelModLoadCommand(kernelModPath);
+    if(doesFileExist(healthModeFilePath)) {
+        return 0;
     }
     //failed again for some reason
-
-    throw std::runtime_error("Failed to load the kernel module");
+    return 2;
 }
 
 int getBatteryState() {
@@ -73,7 +64,7 @@ int getBatteryState() {
     file.close();
     return state;
 }
-void setBatteryState(int state) {
+bool setBatteryState(int state) {
     const char* command;
     if (state == 0) {
         command = "pkexec sh -c 'echo 0 | tee /sys/bus/wmi/drivers/acer-wmi-battery/health_mode'";
@@ -84,8 +75,9 @@ void setBatteryState(int state) {
     int returnValue = system(command);
     if (returnValue != 0) {
         // The command failed
-        throw std::runtime_error("Health Mode toggle Command failed");
+        return false;
     }
+    return true;
 }
 QString getHostNameQString() {
     QString hostname;
@@ -127,16 +119,16 @@ QString getOsName() {
     // Extract the substring between the double quotes
     return osName.mid(startIndex + 1, endIndex - startIndex - 1);
 }
-QString getGpuName() {
-    QProcess process;
-    QString gpuName;
-    process.start("lspci | grep -i vga");
-    process.waitForFinished();
-    if (process.exitCode() == 0) {
-        gpuName = QString::fromUtf8(process.readAllStandardOutput()).trimmed();
-    }
-    return gpuName;
-}
+//QString getGpuName() {
+//    QProcess process;
+//    QString gpuName;
+//    process.start("lspci | grep -i vga");
+//    process.waitForFinished();
+//    if (process.exitCode() == 0) {
+//        gpuName = QString::fromUtf8(process.readAllStandardOutput()).trimmed();
+//    }
+//    return gpuName;
+//}
 QString getCpuName() {
 
     QProcess process;
