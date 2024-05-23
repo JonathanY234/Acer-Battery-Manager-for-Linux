@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     // Process the command-line arguments
     parser.process(app);
 
-    // Check if logging should be enabled
+    // Enable logging if argument sets it
     if (parser.isSet(logOption)) {
         QLoggingCategory::setFilterRules("*.debug=true\n*.warning=true\n*.critical=true\nqt.*.debug=false");
     }

@@ -55,14 +55,34 @@ int compileAndLoadKernelModule() {
     //failed again for some reason
     return 2;
 }
-
+int getCalibrationState() {
+    std::ifstream file("/sys/bus/wmi/drivers/acer-wmi-battery/calibration_mode");
+    int state;
+    file >> state; // Read the integer value from the file
+    file.close();
+    return state;
+}
 int getBatteryState() {
-
     std::ifstream file("/sys/bus/wmi/drivers/acer-wmi-battery/health_mode");
     int state;
     file >> state; // Read the integer value from the file
     file.close();
     return state;
+}
+bool setCalibrationState(int state) {
+    const char* command;
+    if (state == 0) {
+        command = "pkexec sh -c 'echo 0 | sudo tee /sys/bus/wmi/drivers/acer-wmi-battery/calibration_mode'";
+    }
+    else if (state == 1) {
+        command = "pkexec sh -c 'echo 1 | sudo tee /sys/bus/wmi/drivers/acer-wmi-battery/calibration_mode'";
+    }
+    int returnValue = system(command);
+    if (returnValue != 0) {
+        // The command failed
+        return false;
+    }
+    return true;
 }
 bool setBatteryState(int state) {
     const char* command;

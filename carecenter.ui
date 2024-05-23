@@ -57,7 +57,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="LaptopIcon.qrc">:/images/battery.png</pixmap>
+      <pixmap resource="BatteryIcon.qrc">:/images/battery.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -126,7 +126,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>380</y>
+       <y>320</y>
        <width>301</width>
        <height>31</height>
       </rect>
@@ -149,8 +149,8 @@
     <widget class="QPushButton" name="BatteryCalibrateButton">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>430</y>
+       <x>50</x>
+       <y>360</y>
        <width>211</width>
        <height>21</height>
       </rect>
@@ -166,6 +166,41 @@
      </property>
      <property name="text">
       <string>Start Battery Calibration</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="BatteryCalibrationMessage">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>390</y>
+       <width>301</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Battery Calibration active. Device will fully discharge and then charge to 100% once. Once this is complete you can press the button bellow to turn off battery calibration. Do not use the device during this time.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="DisableBatteryCalibrationButton">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>490</y>
+       <width>271</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Press here when battery has fully recharged</string>
      </property>
     </widget>
    </widget>
@@ -464,6 +499,7 @@
   </widget>
  </widget>
  <resources>
+  <include location="BatteryIcon.qrc"/>
   <include location="LaptopIcon.qrc"/>
   <include location="BinIcon.qrc"/>
  </resources>
