@@ -53,7 +53,7 @@ void CareCenter::on_HealthModeCheckBox_stateChanged(int state)
     if ((state) == getBatteryState()) {//skip if we are not changing anything
         return;
     }
-    qDebug() << "\n we are setting battery state to " << (state);
+    qDebug() << "\nSetting battery state to " << (state);
 
 
     bool result = setBatteryState(state);
