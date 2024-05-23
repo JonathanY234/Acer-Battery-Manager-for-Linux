@@ -1,17 +1,31 @@
 #include "carecenter.h"
-
 #include <QApplication>
+#include <QCommandLineParser>
 #include <QLoggingCategory>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
+    QCoreApplication::setApplicationName("Unoffical Acer Care Center");
+    QCoreApplication::setApplicationVersion("1.0");
 
-    // Override Qt's logging rules to enable debug messages, disable for release
-    QLoggingCategory::setFilterRules("*.debug=true\n*.warning=true\n*.critical=true\nqt.*.debug=false");
-    //QLoggingCategory::setFilterRules("*.debug=true\nqt.*.debug=false");
+    // Set up command-line parser
+    QCommandLineParser parser;
+    parser.setApplicationDescription("Change Acer specific battery settings");
+    parser.addHelpOption();
+    parser.addVersionOption();
+    QCommandLineOption logOption("enable-logging", "Enable detailed logging output.");
+    parser.addOption(logOption);
+
+    // Process the command-line arguments
+    parser.process(app);
+
+    // Check if logging should be enabled
+    if (parser.isSet(logOption)) {
+        QLoggingCategory::setFilterRules("*.debug=true\n*.warning=true\n*.critical=true\nqt.*.debug=false");
+    }
 
     CareCenter w;
     w.show();
-    return a.exec();
+    return app.exec();
 }
