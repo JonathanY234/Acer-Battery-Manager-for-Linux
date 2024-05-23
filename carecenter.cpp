@@ -31,13 +31,19 @@ CareCenter::CareCenter(QWidget *parent)
     }
 
     //set the Battery Health Mode toggle text
-    if (getBatteryState() == 0){
+    if (getBatteryState() == 0) {
         ui->HealthModeCheckBox->setText("Battery Health Mode (Disabled)");
     }
     else {
         ui->HealthModeCheckBox->setText("Battery Health Mode (Enabled)");
         ui->HealthModeCheckBox->setChecked(true);
+    }
 
+    //Set Battery Calibration buttons disabled if calibration mode off
+    if (getCalibrationState() == 0) {
+        ui->BatteryCalibrationMessage->setVisible(false);
+        ui->DisableBatteryCalibrationButton->setVisible(false);
+        ui->DisableBatteryCalibrationButton->setEnabled(false);
     }
 }
 
@@ -73,7 +79,35 @@ void CareCenter::on_HealthModeCheckBox_stateChanged(int state)
 void CareCenter::on_BatteryCalibrateButton_clicked()
 {
     qDebug() << "bcalibrate clicked";
+    setCalibrationState(1);
+
+    bool result = getCalibrationState();
+    if (result) {
+        sendStatusGui("Battery calibration mode enabled successfully");
+        ui->BatteryCalibrationMessage->setVisible(true);
+        ui->DisableBatteryCalibrationButton->setVisible(true);
+        ui->DisableBatteryCalibrationButton->setEnabled(true);
+    } else {
+        sendStatusGui("Error: Battery calibration mode not enabled");
+    }
+}
+void CareCenter::on_DisableBatteryCalibrationButton_clicked()
+{
+    qDebug() << "bcalibrate Disable clicked";
+    setCalibrationState(0);
+    bool result = getCalibrationState();
+    if (!result) {
+        sendStatusGui("Battery calibration mode disabled successfully");
+        ui->BatteryCalibrationMessage->setVisible(false);
+        ui->DisableBatteryCalibrationButton->setVisible(false);
+        ui->DisableBatteryCalibrationButton->setEnabled(false);
+    } else {
+        sendStatusGui("Error: Battery calibration mode not disabled");
+    }
 }
 void CareCenter::sendStatusGui(QString message) {
     ui->textOutput->appendPlainText(message);
 }
+
+
+
