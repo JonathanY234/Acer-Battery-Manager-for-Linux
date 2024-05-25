@@ -6,7 +6,12 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    QCoreApplication::setApplicationName("Unoffical Acer Care Center");
+
+    //attempts to make icons work
+    QGuiApplication::setDesktopFileName("UnofficialAcerCareCenter");
+    QCoreApplication::setApplicationName("Unofficial Acer Care Center");
+
+    //QString desktopFileName = "UnofficialAcerCareCenter.desktop";
     QCoreApplication::setApplicationVersion("1.0");
 
     // Set up command-line parser
@@ -25,7 +30,7 @@ int main(int argc, char *argv[])
         QLoggingCategory::setFilterRules("*.debug=true\n*.warning=true\n*.critical=true\nqt.*.debug=false");
     }
 
-    CareCenter w;
-    w.show();
+    CareCenter window;
+    window.show();
     return app.exec();
 }

@@ -28,6 +28,9 @@ CareCenter::CareCenter(QWidget *parent)
     case 2:
         sendStatusGui("failed to load kernel module: battery features wont work");
         qDebug() << "failed to load kernel module: battery features wont work";
+        break;
+    case 3:
+        sendStatusGui("could not find acer-wmi-battery folder, it is required for changing battery settings\nThe folder should be in .local/share/UnnofficalAcerCareCenter if installed or the same directory as the executable");
     }
 
     //set the Battery Health Mode toggle text
@@ -40,7 +43,7 @@ CareCenter::CareCenter(QWidget *parent)
     }
 
     //Set Battery Calibration buttons disabled if calibration mode off
-    if (getCalibrationState() == 0) {
+    if (getCalibrationState() != 1) {//use != 1 incase the kmod doesnt load
         ui->BatteryCalibrationMessage->setVisible(false);
         ui->DisableBatteryCalibrationButton->setVisible(false);
         ui->DisableBatteryCalibrationButton->setEnabled(false);
