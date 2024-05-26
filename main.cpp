@@ -11,7 +11,6 @@ int main(int argc, char *argv[])
     QGuiApplication::setDesktopFileName("UnofficialAcerCareCenter");
     QCoreApplication::setApplicationName("Unofficial Acer Care Center");
 
-    //QString desktopFileName = "UnofficialAcerCareCenter.desktop";
     QCoreApplication::setApplicationVersion("1.0");
 
     // Set up command-line parser

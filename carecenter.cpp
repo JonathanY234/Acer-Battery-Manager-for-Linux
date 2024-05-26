@@ -90,6 +90,7 @@ void CareCenter::on_BatteryCalibrateButton_clicked()
     bool result = getCalibrationState();
     if (result) {
         sendStatusGui("Battery calibration mode enabled successfully");
+        ui->BatteryCalibrateButton->setEnabled(false);
         ui->BatteryCalibrationMessage->setVisible(true);
         ui->DisableBatteryCalibrationButton->setVisible(true);
         ui->DisableBatteryCalibrationButton->setEnabled(true);
@@ -104,6 +105,7 @@ void CareCenter::on_DisableBatteryCalibrationButton_clicked()
     bool result = getCalibrationState();
     if (!result) {
         sendStatusGui("Battery calibration mode disabled successfully");
+        ui->BatteryCalibrateButton->setEnabled(true);
         ui->BatteryCalibrationMessage->setVisible(false);
         ui->DisableBatteryCalibrationButton->setVisible(false);
         ui->DisableBatteryCalibrationButton->setEnabled(false);

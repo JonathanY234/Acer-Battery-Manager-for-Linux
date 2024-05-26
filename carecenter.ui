@@ -40,7 +40,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(163, 204, 34);</string>
+     <string notr="true">background-color: rgb(163, 204, 34);
+background-color: rgb(143, 194, 24);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Shape::StyledPanel</enum>
@@ -61,7 +62,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="BatteryIcon.qrc">:/images/battery.png</pixmap>
+      <pixmap resource="LaptopIcon.qrc">:/images/battery.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -132,7 +133,7 @@
        <x>10</x>
        <y>320</y>
        <width>301</width>
-       <height>31</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -144,7 +145,7 @@
       <string>Make the charge level and remaining time more accurate (takes a long time)</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
+      <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -397,7 +398,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(243, 90, 90);</string>
+     <string notr="true">background-color: rgb(243, 90, 90);
+background-color: rgb(243, 60, 60);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Shape::StyledPanel</enum>
@@ -598,10 +600,9 @@
   </widget>
  </widget>
  <resources>
+  <include location="LaptopIcon.qrc"/>
   <include location="CpuIcon.qrc"/>
   <include location="ApplicationIcon.qrc"/>
-  <include location="BatteryIcon.qrc"/>
-  <include location="LaptopIcon.qrc"/>
  </resources>
  <connections/>
 </ui>
