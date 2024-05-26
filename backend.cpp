@@ -7,7 +7,8 @@
 #include <QString>
 #include <QDebug>
 #include <QCoreApplication>
-#include <QFileInfo>//
+#include <QFileInfo>
+#include <QRegularExpression>
 
 //1 means battery 80% limit on
 //0 means no limit
@@ -163,16 +164,34 @@ QString getOsName() {
     // Extract the substring between the double quotes
     return osName.mid(startIndex + 1, endIndex - startIndex - 1);
 }
-//QString getGpuName() {
-//    QProcess process;
-//    QString gpuName;
-//    process.start("lspci | grep -i vga");
-//    process.waitForFinished();
-//    if (process.exitCode() == 0) {
-//        gpuName = QString::fromUtf8(process.readAllStandardOutput()).trimmed();
-//    }
-//    return gpuName;
-//}
+QString getGpuName() {
+
+    QProcess process;
+    process.start("lspci", QStringList() << "-mm");
+    if (!process.waitForFinished()) {
+        qWarning() << "Failed to execute lspci";
+        return "Error";
+    }
+
+    QByteArray output = process.readAllStandardOutput();
+    QString outputStr(output);
+    QStringList lines = outputStr.split('\n');
+    QString correctLine;
+    for (const QString &line : lines) {
+        if (line.contains("\"3D controller\"")) {
+            correctLine = line;
+            break;
+        }
+    }
+    qDebug() << "correctLine: ";
+    qDebug() << correctLine;
+    QStringList fields = correctLine.split('"');
+    qDebug() << fields;
+    if (fields.size() >= 6) {
+        return fields[5];
+    }
+    return "Error";
+}
 QString getCpuName() {
 
     QProcess process;
@@ -190,4 +209,27 @@ QString getTotalRam() {
     ramInKB = ramInKB.section(' ', 0, 0);
     double ramInGB = ramInKB.toDouble() / (1024 * 1024);
     return QString::number(ramInGB).left(5);
+}
+QString getSNNumber() {
+    QProcess process;
+    QStringList args;
+    args << "cat" << "/sys/devices/virtual/dmi/id/board_serial"; // command and arguments
+    process.start("pkexec", args);
+
+    if (!process.waitForFinished()) {
+        qWarning() << "Error executing command:" << process.errorString();
+        return "";
+    }
+
+    // Read the output of the process
+    QString output = process.readAllStandardOutput();
+    QString errorOutput = process.readAllStandardError();
+
+    // Check for errors
+    if (!errorOutput.isEmpty()) {
+        qWarning() << "Error output:" << errorOutput;
+        return "";
+    }
+
+    return output.trimmed();
 }

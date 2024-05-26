@@ -40,7 +40,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(27, 200, 68);</string>
+     <string notr="true">background-color: rgb(163, 204, 34);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Shape::StyledPanel</enum>
@@ -61,7 +61,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="LaptopIcon.qrc">:/images/battery.png</pixmap>
+      <pixmap resource="BatteryIcon.qrc">:/images/battery.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -100,7 +100,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="text">
@@ -117,7 +117,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>240</y>
+       <y>230</y>
        <width>231</width>
        <height>22</height>
       </rect>
@@ -137,7 +137,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>10</pointsize>
       </font>
      </property>
      <property name="text">
@@ -218,7 +218,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(208, 208, 0);</string>
+     <string notr="true">background-color: rgb(248, 192, 63);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Shape::StyledPanel</enum>
@@ -226,7 +226,7 @@
     <property name="frameShadow">
      <enum>QFrame::Shadow::Raised</enum>
     </property>
-    <widget class="QLabel" name="BatteryIcon_2">
+    <widget class="QLabel" name="LaptopIcon">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -336,11 +336,102 @@
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_8">
+    <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>250</y>
+       <width>291</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Serial Number</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="SNNumberText">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>270</y>
+       <width>291</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>SN number not set</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="getSNButton">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>270</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Click to get SN</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="Red_Frame">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>20</y>
+      <width>311</width>
+      <height>391</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(243, 90, 90);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Shape::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Shadow::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>291</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Hardware</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
        <width>291</width>
        <height>21</height>
       </rect>
@@ -361,7 +452,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>270</y>
+       <y>170</y>
        <width>291</width>
        <height>20</height>
       </rect>
@@ -373,27 +464,11 @@
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="RAMAmountText">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>330</y>
-       <width>291</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>RAM amount placeholder</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>310</y>
+       <y>220</y>
        <width>291</width>
        <height>21</height>
       </rect>
@@ -410,26 +485,68 @@
       <set>Qt::AlignmentFlag::AlignCenter</set>
      </property>
     </widget>
-   </widget>
-   <widget class="QFrame" name="Red_Frame">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>20</y>
-      <width>311</width>
-      <height>391</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(223, 0, 0);</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Shape::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Shadow::Raised</enum>
-    </property>
-    <widget class="QLabel" name="BatteryIcon_3">
+    <widget class="QLabel" name="RAMAmountText">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>240</y>
+       <width>291</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>RAM amount placeholder</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>290</y>
+       <width>291</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>GPU</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="GPUNameText">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>310</y>
+       <width>291</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>gpu name placeholder</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -442,29 +559,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="BinIcon.qrc">:/images/recycling_bin.png</pixmap>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>100</y>
-       <width>291</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>14</pointsize>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>TuneUp</string>
+      <pixmap resource="CpuIcon.qrc">:/images/cpu.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -481,7 +576,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(85, 170, 255);</string>
+     <string notr="true">background-color: rgb(20, 183, 167);</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Shape::StyledPanel</enum>
@@ -489,7 +584,7 @@
     <property name="frameShadow">
      <enum>QFrame::Shadow::Raised</enum>
     </property>
-    <widget class="QPlainTextEdit" name="textOutput">
+    <widget class="QPlainTextEdit" name="CpuIcon">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -503,9 +598,10 @@
   </widget>
  </widget>
  <resources>
-  <include location="LaptopIcon.qrc"/>
-  <include location="BinIcon.qrc"/>
+  <include location="CpuIcon.qrc"/>
   <include location="ApplicationIcon.qrc"/>
+  <include location="BatteryIcon.qrc"/>
+  <include location="LaptopIcon.qrc"/>
  </resources>
  <connections/>
 </ui>

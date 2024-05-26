@@ -25,6 +25,8 @@ private slots:
 
     void on_DisableBatteryCalibrationButton_clicked();
 
+    void on_getSNButton_clicked();
+
 private:
     Ui::CareCenter *ui;
 };
