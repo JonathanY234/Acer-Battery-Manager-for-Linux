@@ -29,5 +29,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     ApplicationIcon.qrc \
     BatteryIcon.qrc \
-    BinIcon.qrc \
+    CpuIcon.qrc \
     LaptopIcon.qrc

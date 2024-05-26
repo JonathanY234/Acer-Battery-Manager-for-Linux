@@ -13,17 +13,18 @@ CareCenter::CareCenter(QWidget *parent)
     ui->BitsText->setText(QString::number(sizeof(void*) * 8) + "-bit");
     ui->CPUNameText->setText(getCpuName());
     ui->RAMAmountText->setText(getTotalRam() + " GiB");
+    ui->GPUNameText->setText(getGpuName());
 
     //complile and load the kernel module
     int error = compileAndLoadKernelModule();
     switch (error) {
     case 0:
-        sendStatusGui("kmod loaded successfully");
-        qDebug() << "kmod loaded successfully";
+        sendStatusGui("Kernel Module loaded successfully");
+        qDebug() << "Kernel Module loaded successfully";
         break;
     case 1:
-        sendStatusGui("kmod already loaded");
-        qDebug() << "kmod already loaded";
+        sendStatusGui("Kernel Module already loaded");
+        qDebug() << "Kernel Module already loaded";
         break;
     case 2:
         sendStatusGui("failed to load kernel module: battery features wont work");
@@ -48,6 +49,8 @@ CareCenter::CareCenter(QWidget *parent)
         ui->DisableBatteryCalibrationButton->setVisible(false);
         ui->DisableBatteryCalibrationButton->setEnabled(false);
     }
+    //Set SN button invisible
+    ui->SNNumberText->setVisible(false);
 }
 
 CareCenter::~CareCenter()
@@ -109,8 +112,17 @@ void CareCenter::on_DisableBatteryCalibrationButton_clicked()
     }
 }
 void CareCenter::sendStatusGui(QString message) {
-    ui->textOutput->appendPlainText(message);
+    ui->CpuIcon->appendPlainText(message);
 }
 
 
+
+
+void CareCenter::on_getSNButton_clicked()
+{
+    ui->getSNButton->setVisible(false);
+    ui->getSNButton->setEnabled(false);
+    ui->SNNumberText->setVisible(true);
+    ui->SNNumberText->setText(getSNNumber());
+}
 
