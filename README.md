@@ -4,9 +4,9 @@ This program only works on Acer laptops that support the battery features.
 
 ## Overview
 
-This Application allows configuring Battery Health settings from Linux that is setting a 80% charge limit to conserve battery health and start a battery calibration mode.<br>
+This Application allows configuring Battery Health settings from Linux; that is setting a 80% charge limit to conserve battery health and start a battery calibration mode.<br>
 This functionality is provided by a Kernel Module [acer-wmi-battery](https://github.com/frederik-h/acer-wmi-battery/) by Frederik Harwath. However this application makes it significatly more user friendly as it takes care of compiling for every new kernel version and provides graphical interface over some longish bash commands. <br>
-It also provides some useful system info about the laptop running it.
+It provides some useful system info about the laptop as well.
 
 ## Dependencies
 
