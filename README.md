@@ -10,7 +10,12 @@ It also provides some useful system info about the laptop running it.
 
 ## Dependencies
 
-Not finished yet
+Most dependencies will be already installed on a linux system
+
+### Fedora based:
+sudo dnf install cmake kernel-headers kernel-devel qt6-qtbase-gui pciutils
+### Ubuntu based:
+### Arch based:
 
 ## Installation
 

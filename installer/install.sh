@@ -5,7 +5,7 @@ executablePath="$(pwd)/Unofficial_Acer_Care_Center"
 kmodPath="$(pwd)/acer-wmi-battery"
 iconPath="$(pwd)/AcerCareCenter.png"
 localPath="$HOME/.local/share/UnofficialAcerCareCenter"
-desktopFilePath="$HOME/.local/share/applications/UnofficialAcerCareCenter.desktop"
+desktopFilePath="$HOME/.local/share/applications"
 
 echo "Executable path is: $executablePath"
 echo "kmod path is: $kmodPath"
@@ -19,7 +19,8 @@ mv -f "$iconPath" "$localPath"
 
 echo "Moved files to .local/share/UnofficialAcerCareCenter"
 
-cat <<EOL > "$desktopFilePath"
+mkdir "$desktopFilePath"
+cat <<EOL > "$desktopFilePath/UnofficialAcerCareCenter.desktop"
 [Desktop Entry]
 Comment=
 Exec=$localPath/Unofficial_Acer_Care_Center
@@ -34,6 +35,8 @@ TerminalOptions=
 Type=Application
 Categories=Settings;
 EOL
+
+chmod +x "$desktopFilePath/UnofficialAcerCareCenter.desktop"
 
 echo "Install complete"
 echo "You can now delete the installer and use the application"
