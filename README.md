@@ -1,6 +1,6 @@
 # Unofficial Acer Care Center for Linux
 
-This program only works on Acer laptops that support the battery features.
+This program only works on Acer laptops that support the battery features. (Most newish ones)
 
 ## Overview
 
@@ -25,8 +25,8 @@ Optional: sudo pacman -S qt6-wayland
 1. Install all dependencies with your package manager
 2. Download and extract the file from releases section
 3. Run the executable
-- Be aware that the folder "acer-wmi-battery" must be avaliable in the execuatable's PATH
-- You can create a .desktop file to get the icon working and make it appear in the application launcher or run "install.sh" to do this automatically
+- Be aware that the folder "acer-wmi-battery" must be avaliable in the execuatable's PATH (in the same folder as execuatable)
+- You can put the files where you want. Create a .desktop file to get the icon working and make the app appear in the application launcher or run "install.sh" to do this automatically
 - Was compiled for the older Qt 6.4.2; should work on most systems. For very old systems or unique configurations, consider compiling from source.
 
 ## Compiling
@@ -44,7 +44,7 @@ make
 
 ## Security
 
-This application will ask for the udo password on several instances, this is because it changing battery settings requires a kernel module and writing to protected files to change this bios level settings. It doesnt store your password which is why it will prompt for it each time you change these settings. The prompt is from polkit and displays the command being executed, providing transparency about the actions being taken.
+This application will ask for the sudo password on several instances, this is because it changing battery settings requires a kernel module and writing to protected files to change this bios level setting. It doesnt store your password which is why it will prompt for it each time you change these settings. The prompt is from polkit and displays the command being executed, providing transparency about the actions being taken.
 
 ## Bugs
 

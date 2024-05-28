@@ -595,6 +595,17 @@ background-color: rgb(243, 60, 60);</string>
        <height>161</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="plainText">
+      <string>System Status:</string>
+     </property>
     </widget>
    </widget>
   </widget>
