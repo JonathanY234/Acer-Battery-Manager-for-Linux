@@ -62,7 +62,7 @@ background-color: rgb(143, 194, 24);</string>
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="LaptopIcon.qrc">:/images/battery.png</pixmap>
+      <pixmap resource="BatteryIcon.qrc">:/images/battery.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -591,8 +591,8 @@ background-color: rgb(243, 60, 60);</string>
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>621</width>
-       <height>151</height>
+       <width>631</width>
+       <height>161</height>
       </rect>
      </property>
     </widget>
@@ -600,8 +600,9 @@ background-color: rgb(243, 60, 60);</string>
   </widget>
  </widget>
  <resources>
-  <include location="LaptopIcon.qrc"/>
+  <include location="BatteryIcon.qrc"/>
   <include location="CpuIcon.qrc"/>
+  <include location="LaptopIcon.qrc"/>
   <include location="ApplicationIcon.qrc"/>
  </resources>
  <connections/>

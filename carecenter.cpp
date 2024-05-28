@@ -32,6 +32,8 @@ CareCenter::CareCenter(QWidget *parent)
         break;
     case 3:
         sendStatusGui("could not find acer-wmi-battery folder, it is required for changing battery settings\nThe folder should be in .local/share/UnnofficalAcerCareCenter if installed or the same directory as the executable");
+    case 4:
+        sendStatusGui("Error compiling the kernel module. Make sure you have all dependencies installed\nTry entering the folder acer-wmi-battery and running the command 'make', if that works congrats it will work now (and please make a bug report)");
     }
 
     //set the Battery Health Mode toggle text
