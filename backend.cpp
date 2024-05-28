@@ -8,7 +8,7 @@
 #include <QDebug>
 #include <QCoreApplication>
 #include <QFileInfo>
-#include <QRegularExpression>
+//#include <QRegularExpression>
 
 //1 means battery 80% limit on
 //0 means no limit
@@ -68,7 +68,13 @@ int compileAndLoadKernelModule() {
     } else {
         compileCommand = "make -C acer-wmi-battery";
     }
-    system(compileCommand.toUtf8().constData());
+
+    int result = system(compileCommand.toUtf8().constData());
+    if (result != 0) {
+        qDebug() << "compile command exit code: " << result;
+        return 4;
+    }
+
 
     //try loading again now its been compiled
     runKernelModLoadCommand(kernelModPath);
@@ -183,10 +189,7 @@ QString getGpuName() {
             break;
         }
     }
-    qDebug() << "correctLine: ";
-    qDebug() << correctLine;
     QStringList fields = correctLine.split('"');
-    qDebug() << fields;
     if (fields.size() >= 6) {
         return fields[5];
     }
