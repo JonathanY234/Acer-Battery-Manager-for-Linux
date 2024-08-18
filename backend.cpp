@@ -8,7 +8,7 @@
 #include <QDebug>
 #include <QCoreApplication>
 #include <QFileInfo>
-//#include <QRegularExpression>
+#include <sys/utsname.h>  // For uname()
 
 //1 means battery 80% limit on
 //0 means no limit
@@ -235,4 +235,13 @@ QString getSNNumber() {
     }
 
     return output.trimmed();
+}
+QString getKernelName() {
+    struct utsname buffer;
+
+    if (uname(&buffer) != 0) {
+        return QString("could not get kernel version");
+    }
+
+    return QString(buffer.release);  // Return the kernel version as a QString
 }
