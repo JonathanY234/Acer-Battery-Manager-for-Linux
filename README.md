@@ -10,13 +10,13 @@ It provides some useful system info about the laptop as well.
 
 ## Dependencies
 
-Most dependencies will be already installed on a linux system
+Most dependencies will be already installed on a linux system but these are required for full functionality
 
-### Fedora based:
+### Red hat / Fedora:
 sudo dnf install kernel-headers kernel-devel qt6-qtbase-gui pciutils
-### Ubuntu based:
+### Debian / Ubuntu:
 sudo apt install build-essential linux-headers-$(uname -r) libqt6widgets6t64 pciutils
-### Arch based:
+### Arch:
 sudo pacman -S qt6-base make linux-headersbase-devel pciutils<br>
 Optional: sudo pacman -S qt6-wayland
 

@@ -13,5 +13,6 @@ QString getCpuName();
 QString getTotalRam();
 QString getSNNumber();
 QString getKernelName();
+int checkDependencies();
 
 #endif // BACKEND_H

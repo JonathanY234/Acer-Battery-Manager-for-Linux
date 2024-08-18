@@ -9,6 +9,7 @@
 #include <QCoreApplication>
 #include <QFileInfo>
 #include <sys/utsname.h>  // For uname()
+#include <cstdlib>  // For std::system
 
 //1 means battery 80% limit on
 //0 means no limit
@@ -244,4 +245,18 @@ QString getKernelName() {
     }
 
     return QString(buffer.release);  // Return the kernel version as a QString
+}
+int checkDependencies() {
+    //make
+    int result = std::system("make --version > /dev/null 2>&1");
+    if  (result != 0) {
+        return 1;
+    }
+    //pciutils
+    // Run the command "lspci" and redirect output to /dev/null to suppress it
+    result = std::system("command -v lspci > /dev/null 2>&1");
+    if (result != 0) {
+        return 2;
+    }
+    return 0;
 }
