@@ -6,7 +6,7 @@
 CareCenter::CareCenter(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::CareCenter)
-{
+{   
     ui->setupUi(this);
     ui->ModelNameText->setText(getHostNameQString());
     ui->OSNameText->setText(getOsName());
@@ -15,6 +15,15 @@ CareCenter::CareCenter(QWidget *parent)
     ui->RAMAmountText->setText(getTotalRam() + " GiB");
     ui->GPUNameText->setText(getGpuName());
     ui->kernelText->setText(getKernelName());
+
+    //check dependencies
+    int result = checkDependencies();
+    if (result == 1) {
+        sendStatusGui("missing dependency 'make'");
+    } else if (result == 2) {
+        sendStatusGui("missing dependency 'pciutils' (lspci)");
+    }
+
 
     //complile and load the kernel module
     int error = compileAndLoadKernelModule();
@@ -32,7 +41,7 @@ CareCenter::CareCenter(QWidget *parent)
         qDebug() << "failed to load kernel module: battery features wont work";
         break;
     case 3:
-        sendStatusGui("could not find acer-wmi-battery folder, it is required for changing battery settings\nThe folder should be in .local/share/UnnofficalAcerCareCenter if installed or the same directory as the executable");
+        sendStatusGui("could not find acer-wmi-battery folder, it is required for changing battery settings\nThe folder should be in .local/share/UnofficalAcerCareCenter if installed or the same directory as the executable");
     case 4:
         sendStatusGui("Error compiling the kernel module. Make sure you have all dependencies installed\nTry entering the folder acer-wmi-battery and running the command 'make', if that works congrats it will work now (and please make a bug report)");
     }
