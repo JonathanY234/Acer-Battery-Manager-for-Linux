@@ -12,5 +12,6 @@ QString getGpuName();
 QString getCpuName();
 QString getTotalRam();
 QString getSNNumber();
+QString getKernelName();
 
 #endif // BACKEND_H

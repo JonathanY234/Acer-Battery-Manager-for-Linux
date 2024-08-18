@@ -387,6 +387,54 @@ background-color: rgb(143, 194, 24);</string>
       <string>Click to get SN</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>310</y>
+       <width>291</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Kernel Version</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="kernelText">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>330</y>
+       <width>291</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>kernel version placeholder</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+    <zorder>LaptopIcon</zorder>
+    <zorder>label_2</zorder>
+    <zorder>ModelNameText</zorder>
+    <zorder>OSNameText</zorder>
+    <zorder>BitsText</zorder>
+    <zorder>label_12</zorder>
+    <zorder>SNNumberText</zorder>
+    <zorder>getSNButton</zorder>
+    <zorder>label_14</zorder>
+    <zorder>kernelText</zorder>
+    <zorder>label_5</zorder>
    </widget>
    <widget class="QFrame" name="Red_Frame">
     <property name="geometry">
@@ -552,9 +600,9 @@ background-color: rgb(243, 60, 60);</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
+       <y>10</y>
        <width>291</width>
-       <height>61</height>
+       <height>81</height>
       </rect>
      </property>
      <property name="text">

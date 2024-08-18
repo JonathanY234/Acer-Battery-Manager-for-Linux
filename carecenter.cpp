@@ -14,6 +14,7 @@ CareCenter::CareCenter(QWidget *parent)
     ui->CPUNameText->setText(getCpuName());
     ui->RAMAmountText->setText(getTotalRam() + " GiB");
     ui->GPUNameText->setText(getGpuName());
+    ui->kernelText->setText(getKernelName());
 
     //complile and load the kernel module
     int error = compileAndLoadKernelModule();

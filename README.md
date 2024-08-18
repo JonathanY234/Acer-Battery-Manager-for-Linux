@@ -44,7 +44,7 @@ make
 
 ## Security
 
-This application will ask for the sudo password on several instances, this is because it changing battery settings requires a kernel module and writing to protected files to change this bios level setting. It doesnt store your password which is why it will prompt for it each time you change these settings. The prompt is from polkit and displays the command being executed, providing transparency about the actions being taken.
+This application will ask for the sudo password on several instances, this is because changing battery settings requires a kernel module and writing to protected files to change this bios level setting. It doesnt store your password which is why it will prompt for it each time you change these settings. The prompt is from polkit and displays the command being executed, providing transparency about the actions being taken.
 
 ## Bugs
 
