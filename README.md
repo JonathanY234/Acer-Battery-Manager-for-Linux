@@ -35,7 +35,7 @@ Optional: sudo pacman -S qt6-wayland
 2. Download and extract source
 3. Compile the project:
 ```bash
-cd Acer_Battery_Manager
+cd Acer-Battery-Manager-for-Linux
 mkdir build
 cd build
 cmake ..
