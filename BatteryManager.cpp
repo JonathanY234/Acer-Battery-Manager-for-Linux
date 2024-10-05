@@ -1,11 +1,11 @@
-#include "carecenter.h"
-#include "ui_carecenter.h"
+#include "BatteryManager.h"
+#include "ui_BatteryManager.h"
 #include "backend.h"
 #include <QDebug>
 
-CareCenter::CareCenter(QWidget *parent)
+BatteryManager::BatteryManager(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::CareCenter)
+    , ui(new Ui::BatteryManager)
 {   
     ui->setupUi(this);
     ui->ModelNameText->setText(getHostNameQString());
@@ -41,7 +41,7 @@ CareCenter::CareCenter(QWidget *parent)
         qDebug() << "failed to load kernel module: battery features wont work";
         break;
     case 3:
-        sendStatusGui("could not find acer-wmi-battery folder, it is required for changing battery settings\nThe folder should be in .local/share/UnofficalAcerCareCenter if installed or the same directory as the executable");
+        sendStatusGui("could not find acer-wmi-battery folder, it is required for changing battery settings\nThe folder should be in .local/share/Acer_Battery_Manager if installed or the same directory as the executable");
     case 4:
         sendStatusGui("Error compiling the kernel module. Make sure you have all dependencies installed\nTry entering the folder acer-wmi-battery and running the command 'make', if that works congrats it will work now (and please make a bug report)");
     }
@@ -65,11 +65,11 @@ CareCenter::CareCenter(QWidget *parent)
     ui->SNNumberText->setVisible(false);
 }
 
-CareCenter::~CareCenter()
+BatteryManager::~BatteryManager()
 {
     delete ui;
 }
-void CareCenter::on_HealthModeCheckBox_stateChanged(int state)
+void BatteryManager::on_HealthModeCheckBox_stateChanged(int state)
 {
     state = state / 2;
     qDebug() << "state: " << state << " getBatteryState: " << getBatteryState();
@@ -94,7 +94,7 @@ void CareCenter::on_HealthModeCheckBox_stateChanged(int state)
     }
 
 }
-void CareCenter::on_BatteryCalibrateButton_clicked()
+void BatteryManager::on_BatteryCalibrateButton_clicked()
 {
     qDebug() << "bcalibrate clicked";
     setCalibrationState(1);
@@ -110,7 +110,7 @@ void CareCenter::on_BatteryCalibrateButton_clicked()
         sendStatusGui("Error: Battery calibration mode not enabled");
     }
 }
-void CareCenter::on_DisableBatteryCalibrationButton_clicked()
+void BatteryManager::on_DisableBatteryCalibrationButton_clicked()
 {
     qDebug() << "bcalibrate Disable clicked";
     setCalibrationState(0);
@@ -125,14 +125,14 @@ void CareCenter::on_DisableBatteryCalibrationButton_clicked()
         sendStatusGui("Error: Battery calibration mode not disabled");
     }
 }
-void CareCenter::sendStatusGui(QString message) {
+void BatteryManager::sendStatusGui(QString message) {
     ui->CpuIcon->appendPlainText(message);
 }
 
 
 
 
-void CareCenter::on_getSNButton_clicked()
+void BatteryManager::on_getSNButton_clicked()
 {
     ui->getSNButton->setVisible(false);
     ui->getSNButton->setEnabled(false);

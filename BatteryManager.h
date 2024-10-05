@@ -1,22 +1,22 @@
-#ifndef CARECENTER_H
-#define CARECENTER_H
+#ifndef BATTERYMANAGER_H
+#define BATTERYMANAGER_H
 
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class CareCenter;
+class BatteryManager;
 }
 QT_END_NAMESPACE
 
-class CareCenter : public QMainWindow
+class BatteryManager : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    CareCenter(QWidget *parent = nullptr);
+    BatteryManager(QWidget *parent = nullptr);
     void sendStatusGui(QString message);
-    ~CareCenter();
+    ~BatteryManager();
 
 private slots:
     void on_HealthModeCheckBox_stateChanged(int state);
@@ -28,6 +28,6 @@ private slots:
     void on_getSNButton_clicked();
 
 private:
-    Ui::CareCenter *ui;
+    Ui::BatteryManager *ui;
 };
-#endif // CARECENTER_H
+#endif // BATTERYMANAGER_H
