@@ -1,4 +1,4 @@
-# Unofficial Acer Care Center for Linux
+# Acer Battery Manager for Linux
 
 This program only works on Acer laptops that support the battery features. (Most newish ones)
 
@@ -31,11 +31,11 @@ Optional: sudo pacman -S qt6-wayland
 
 ## Compiling
 
-1. Install additional packages: cmake and qt6-base-dev or whatever its called
+1. Install additional packages: cmake, g++ and qt6-base-dev or whatever its called
 2. Download and extract source
 3. Compile the project:
 ```bash
-cd Unofficial_Acer_Care_Center
+cd Acer_Battery_Manager
 mkdir build
 cd build
 cmake ..

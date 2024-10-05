@@ -38,10 +38,10 @@ int compileAndLoadKernelModule() {
 
     QString kernelModPath;
     bool isLocalShare;
-    if (doesFileExist(homeDir + "/.local/share/UnofficialAcerCareCenter/acer-wmi-battery")) {
+    if (doesFileExist(homeDir + "/.local/share/Acer_Battery_Manager/acer-wmi-battery")) {
         qDebug() << "found acer-wmi-battery in .local/share";
         isLocalShare = true;
-        kernelModPath = homeDir + "/.local/share/UnofficialAcerCareCenter/acer-wmi-battery/acer-wmi-battery.ko";
+        kernelModPath = homeDir + "/.local/share/Acer_Battery_Manager/acer-wmi-battery/acer-wmi-battery.ko";
     } else if (doesFileExist(excutableDir + "/acer-wmi-battery")) {
         qDebug() << "found acer-wmi-battery in executable directory";
         kernelModPath = excutableDir + "/acer-wmi-battery/acer-wmi-battery.ko";
@@ -65,7 +65,7 @@ int compileAndLoadKernelModule() {
     Compile_Step:
     QString compileCommand;
     if (isLocalShare) {
-        compileCommand = "make -C " + homeDir + "/.local/share/UnofficialAcerCareCenter/acer-wmi-battery";
+        compileCommand = "make -C " + homeDir + "/.local/share/Acer_Battery_Manager/acer-wmi-battery";
     } else {
         compileCommand = "make -C acer-wmi-battery";
     }

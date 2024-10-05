@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CareCenter</class>
- <widget class="QMainWindow" name="CareCenter">
+ <class>BatteryManager</class>
+ <widget class="QMainWindow" name="BatteryManager">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,11 +23,11 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Unofficial Acer Care Center</string>
+   <string>Acer Battery Manager</string>
   </property>
   <property name="windowIcon">
    <iconset resource="ApplicationIcon.qrc">
-    <normaloff>:/images/AcerCareCenter.png</normaloff>:/images/AcerCareCenter.png</iconset>
+    <normaloff>:/images/AcerBatteryManager.png</normaloff>:/images/AcerBatteryManager.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="GreenFrame">

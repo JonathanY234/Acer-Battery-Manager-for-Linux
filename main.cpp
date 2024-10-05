@@ -1,4 +1,4 @@
-#include "carecenter.h"
+#include "BatteryManager.h"
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QLoggingCategory>
@@ -8,10 +8,10 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     //attempts to make icons work
-    QGuiApplication::setDesktopFileName("UnofficialAcerCareCenter");
-    QCoreApplication::setApplicationName("Unofficial Acer Care Center");
+    QGuiApplication::setDesktopFileName("Acer Battery Manager");
+    QCoreApplication::setApplicationName("Acer Battery Manager");
 
-    QCoreApplication::setApplicationVersion("1.0");
+    QCoreApplication::setApplicationVersion("1.1");
 
     // Set up command-line parser
     QCommandLineParser parser;
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         QLoggingCategory::setFilterRules("*.debug=true\n*.warning=true\n*.critical=true\nqt.*.debug=false");
     }
 
-    CareCenter window;
+    BatteryManager window;
     window.show();
     return app.exec();
 }

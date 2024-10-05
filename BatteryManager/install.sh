@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Define the path to the files
-executablePath="$(pwd)/Unofficial_Acer_Care_Center"
+executablePath="$(pwd)/Acer_Battery_Manager"
 kmodPath="$(pwd)/acer-wmi-battery"
-iconPath="$(pwd)/AcerCareCenter.png"
-localPath="$HOME/.local/share/UnofficialAcerCareCenter"
+iconPath="$(pwd)/BatteryManager.png"
+localPath="$HOME/.local/share/Acer_Battery_Manager"
 desktopFilePath="$HOME/.local/share/applications"
 
 echo "Executable path is: $executablePath"
@@ -17,16 +17,16 @@ rm -r "$localPath/acer-wmi-battery"
 mv "$kmodPath" "$localPath"
 mv -f "$iconPath" "$localPath"
 
-echo "Moved files to .local/share/UnofficialAcerCareCenter"
+echo "Moved files to .local/share/Acer_Battery_Manager"
 
 mkdir "$desktopFilePath"
-cat <<EOL > "$desktopFilePath/UnofficialAcerCareCenter.desktop"
+cat <<EOL > "$desktopFilePath/Acer_Battery_Manager.desktop"
 [Desktop Entry]
 Comment=
-Exec=$localPath/Unofficial_Acer_Care_Center
+Exec=$localPath/Acer_Battery_Manager
 GenericName=Change Acer Laptop Battery Settings
-Icon=$localPath/AcerCareCenter.png
-Name=Unofficial Acer Care Center
+Icon=$localPath/BatteryManager.png
+Name=Acer Battery Manager
 NoDisplay=false
 Path=
 StartupNotify=true
@@ -36,7 +36,7 @@ Type=Application
 Categories=Settings;
 EOL
 
-chmod +x "$desktopFilePath/UnofficialAcerCareCenter.desktop"
+chmod +x "$desktopFilePath/Acer_Battery_Manager.desktop"
 
 echo "Install complete"
 echo "You can now delete the installer and use the application"
