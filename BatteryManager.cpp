@@ -6,7 +6,7 @@
 BatteryManager::BatteryManager(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::BatteryManager)
-{   
+{
     ui->setupUi(this);
     ui->ModelNameText->setText(getHostNameQString());
     ui->OSNameText->setText(getOsName());
@@ -23,6 +23,8 @@ BatteryManager::BatteryManager(QWidget *parent)
     } else if (result == 2) {
         sendStatusGui("missing dependency 'pciutils' (lspci)");
     }
+
+    sendStatusGui(getBatteryTemp());
 
 
     //complile and load the kernel module
@@ -43,18 +45,23 @@ BatteryManager::BatteryManager(QWidget *parent)
     case 3:
         sendStatusGui("could not find acer-wmi-battery folder, it is required for changing battery settings\nThe folder should be in .local/share/Acer_Battery_Manager if installed or the same directory as the executable");
     case 4:
-        sendStatusGui("Error compiling the kernel module. Make sure you have all dependencies installed\nTry entering the folder acer-wmi-battery and running the command 'make', if that works congrats it will work now (and please make a bug report)");
+        sendStatusGui("Error compiling the kernel module. Make sure you have all dependencies installed\nTry entering the folder acer-wmi-battery and running the command 'make' to compile manually (and please make a bug report)");
     }
+
+    //set Battery temp
+    ui->BatteryTempText->setText("Battery Temperature: " + getBatteryTemp() + "°C");
 
     //set the Battery Health Mode toggle text
     if (getBatteryState() == 0) {
         ui->HealthModeCheckBox->setText("Battery Health Mode (Disabled)");
     }
-    else {
+    else if (getBatteryState() == 1) {
         ui->HealthModeCheckBox->setText("Battery Health Mode (Enabled)");
         ui->HealthModeCheckBox->setChecked(true);
     }
-
+    else {
+        ui->HealthModeCheckBox->setText("Battery Health Mode (Error)");
+    }
     //Set Battery Calibration buttons disabled if calibration mode off
     if (getCalibrationState() != 1) {//use != 1 incase the kmod doesnt load
         ui->BatteryCalibrationMessage->setVisible(false);

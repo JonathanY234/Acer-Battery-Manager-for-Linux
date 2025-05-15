@@ -88,16 +88,25 @@ int compileAndLoadKernelModule() {
 }
 int getCalibrationState() {
     std::ifstream file("/sys/bus/wmi/drivers/acer-wmi-battery/calibration_mode");
-    int state;
-    file >> state; // Read the integer value from the file
+    int state = -1;
+    if (!file.is_open()) {
+        return -1; // File couldn't be opened
+    }
+    if (!(file >> state)) { // Read the integer value from the file
+        return -1; // Read failed
+    }
     file.close();
     return state;
 }
 int getBatteryState() {
-    //consider making more robust by checking if the file exists
     std::ifstream file("/sys/bus/wmi/drivers/acer-wmi-battery/health_mode");
-    int state;
-    file >> state; // Read the integer value from the file
+    int state = -1;
+    if (!file.is_open()) {
+        return -1; // File couldn't be opened
+    }
+    if (!(file >> state)) { // Read the integer value from the file
+        return -1; // Read failed
+    }
     file.close();
     return state;
 }
@@ -245,6 +254,20 @@ QString getKernelName() {
     }
 
     return QString(buffer.release);  // Return the kernel version as a QString
+}
+QString getBatteryTemp() {
+    std::ifstream file("/sys/bus/wmi/drivers/acer-wmi-battery/temperature");
+    int temperature = -1;
+    if (!file.is_open()) {
+        return ""; // File couldn't be opened
+    }
+    if (!(file >> temperature)) { // Read the integer value from the file
+        return ""; // Read failed
+    }
+    file.close();
+    int tempC = temperature / 1000.0;
+    return QString::number(tempC);
+
 }
 int checkDependencies() {
     //make

@@ -6,6 +6,7 @@ bool setCalibrationState(int state);
 bool setBatteryState(int state);
 int getCalibrationState();
 int getBatteryState();
+QString getBatteryTemp();
 QString getHostNameQString();
 QString getOsName();
 QString getGpuName();
