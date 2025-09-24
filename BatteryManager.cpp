@@ -2,6 +2,7 @@
 #include "ui_BatteryManager.h"
 #include "backend.h"
 #include <QDebug>
+#include <QTimer>
 
 BatteryManager::BatteryManager(QWidget *parent)
     : QMainWindow(parent)
@@ -24,32 +25,19 @@ BatteryManager::BatteryManager(QWidget *parent)
         sendStatusGui("missing dependency 'pciutils' (lspci)");
     }
 
-    sendStatusGui(getBatteryTemp());
-
-
-    //complile and load the kernel module
-    int error = compileAndLoadKernelModule();
-    switch (error) {
-    case 0:
-        sendStatusGui("Kernel Module loaded successfully");
-        qDebug() << "Kernel Module loaded successfully";
-        break;
-    case 1:
-        sendStatusGui("Kernel Module already loaded");
-        qDebug() << "Kernel Module already loaded";
-        break;
-    case 2:
-        sendStatusGui("failed to load kernel module: battery features wont work");
-        qDebug() << "failed to load kernel module: battery features wont work";
-        break;
-    case 3:
-        sendStatusGui("could not find acer-wmi-battery folder, it is required for changing battery settings\nThe folder should be in .local/share/Acer_Battery_Manager if installed or the same directory as the executable");
-    case 4:
-        sendStatusGui("Error compiling the kernel module. Make sure you have all dependencies installed\nTry entering the folder acer-wmi-battery and running the command 'make' to compile manually (and please make a bug report)");
-    }
+    //compile and load the kernel module
+    auto [errorCode, resultMessage] = compileAndLoadKernelModule();
+    sendStatusGui(resultMessage);
+    qDebug() << resultMessage;
 
     //set Battery temp
     ui->BatteryTempText->setText("Battery Temperature: " + getBatteryTemp() + "°C");
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, [this]() {
+        ui->BatteryTempText->setText("Battery Temperature: " + getBatteryTemp() + "°C");
+        sendStatusGui("HIIII");
+    });
+    timer->start(5000);
 
     //set the Battery Health Mode toggle text
     if (getBatteryState() == 0) {

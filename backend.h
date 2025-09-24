@@ -1,7 +1,7 @@
 #ifndef BACKEND_H
 #define BACKEND_H
 
-int compileAndLoadKernelModule();
+std::tuple<int, QString> compileAndLoadKernelModule();
 bool setCalibrationState(int state);
 bool setBatteryState(int state);
 int getCalibrationState();

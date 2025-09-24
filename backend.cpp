@@ -1,7 +1,7 @@
 //#include <cstdlib>
 //#include <iostream>
 #include <fstream>
-//#include <unistd.h>
+#include <tuple>
 
 #include <QProcess>
 #include <QString>
@@ -21,16 +21,13 @@ void runKernelModLoadCommand(QString kernelModPath) {
 }
 bool doesFileExist(QString filePath) {
     QFileInfo fileInfo(filePath);
-    if(fileInfo.exists()) {
-        return true;
-    }
-    return false;
+    return fileInfo.exists();
 }
-int compileAndLoadKernelModule() {
+std::tuple<int, QString> compileAndLoadKernelModule() {
     QString healthModeFilePath = "/sys/bus/wmi/drivers/acer-wmi-battery/health_mode";
     //check if the kernel mod is already loaded
     if(doesFileExist(healthModeFilePath)) {
-        return 1;
+        return {1, "Kernel Module already loaded"};
     }
     //check if acer-wmi-battery exists in either of 2 valid locations
     QString excutableDir = QCoreApplication::applicationDirPath();
@@ -38,17 +35,18 @@ int compileAndLoadKernelModule() {
 
     QString kernelModPath;
     bool isLocalShare;
-    if (doesFileExist(homeDir + "/.local/share/Acer_Battery_Manager/acer-wmi-battery")) {
-        qDebug() << "found acer-wmi-battery in .local/share";
-        isLocalShare = true;
-        kernelModPath = homeDir + "/.local/share/Acer_Battery_Manager/acer-wmi-battery/acer-wmi-battery.ko";
-    } else if (doesFileExist(excutableDir + "/acer-wmi-battery")) {
+
+    if (doesFileExist(excutableDir + "/acer-wmi-battery")) {
         qDebug() << "found acer-wmi-battery in executable directory";
         kernelModPath = excutableDir + "/acer-wmi-battery/acer-wmi-battery.ko";
         isLocalShare = false;
+    } else if (doesFileExist(homeDir + "/.local/share/Acer_Battery_Manager/acer-wmi-battery")) {
+        qDebug() << "found acer-wmi-battery in .local/share";
+        isLocalShare = true;
+        kernelModPath = homeDir + "/.local/share/Acer_Battery_Manager/acer-wmi-battery/acer-wmi-battery.ko";
     } else {
         qDebug() << "could not find acer-wmi-battery";
-        return 3;
+        return {3, "could not find acer-wmi-battery folder, it is required for changing battery settings\nThe folder should be in .local/share/Acer_Battery_Manager if installed or the same directory as the executable"};
     }
 
     //if kernel mod not compiled at all just skip straight to compiling
@@ -59,7 +57,7 @@ int compileAndLoadKernelModule() {
     runKernelModLoadCommand(kernelModPath);
     qDebug() << "first attempt to load kmod";
     if(doesFileExist(healthModeFilePath)) {
-        return 0;
+        return {0, "Kernel Module loaded successfully"};
     }
     //else load failed, try compiling it
     Compile_Step:
@@ -73,18 +71,17 @@ int compileAndLoadKernelModule() {
     int result = system(compileCommand.toUtf8().constData());
     if (result != 0) {
         qDebug() << "compile command exit code: " << result;
-        return 4;
+        return {4, "Error compiling the kernel module. Make sure you have all dependencies installed\nTry entering the folder acer-wmi-battery and running the command 'make' to compile manually (and please make a bug report)"};
     }
-
 
     //try loading again now its been compiled
     runKernelModLoadCommand(kernelModPath);
     qDebug() << "second attempt to load kmod";
     if(doesFileExist(healthModeFilePath)) {
-        return 0;
+        return {0, "Kernel Module loaded successfully"};
     }
     //failed again for some reason
-    return 2;
+    return {2, "failed to load kernel module: battery features wont work"};
 }
 int getCalibrationState() {
     std::ifstream file("/sys/bus/wmi/drivers/acer-wmi-battery/calibration_mode");
@@ -259,10 +256,10 @@ QString getBatteryTemp() {
     std::ifstream file("/sys/bus/wmi/drivers/acer-wmi-battery/temperature");
     int temperature = -1;
     if (!file.is_open()) {
-        return ""; // File couldn't be opened
+        return "file ! opening"; // File couldn't be opened
     }
     if (!(file >> temperature)) { // Read the integer value from the file
-        return ""; // Read failed
+        return "Read failed"; // Read failed
     }
     file.close();
     int tempC = temperature / 1000.0;
